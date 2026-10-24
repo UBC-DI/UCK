@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>UCK-G – Ajouter une actualité</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:680px;margin:20px auto;padding:0 16px;color:#123}
+h1{font-size:1.4em;color:#003366} label{display:block;margin-top:14px;font-weight:bold}
+input,textarea{width:100%;padding:9px;border:1px solid #bbb;border-radius:5px;font-size:1em;box-sizing:border-box}
+button{margin-top:16px;padding:11px 18px;background:#003366;color:#fff;border:0;border-radius:5px;font-size:1em;cursor:pointer}
+.hint{font-weight:normal;color:#567;font-size:.9em} #msg{margin-top:14px;padding:10px;border-radius:5px;display:none}
+.ok{background:#e3f6e8;color:#0a5} .err{background:#fde8e8;color:#a00} ol{line-height:1.5}
+</style></head><body>
+<h1>Ajouter une actualité (sans Facebook)</h1>
+<ol>
+<li>Choisissez le fichier <b>news.json</b> actuel du site (celui de votre dossier GitHub).</li>
+<li>Remplissez l'actualité, puis cliquez sur « Ajouter et télécharger ».</li>
+<li>Sur GitHub : déposez le nouveau <b>news.json</b> (et les photos dans le dossier <b>media</b>) avec « Add file → Upload files ».</li>
+</ol>
+<label>1. news.json actuel <span class="hint">(laissez vide si le site n'a encore aucune actualité)</span>
+<input type="file" id="f" accept=".json,application/json"></label>
+<label>Titre <input id="t" maxlength="120"></label>
+<label>Texte <textarea id="x" rows="6"></textarea></label>
+<label>Date <input id="d" type="date"></label>
+<label>Photos <span class="hint">(une par ligne, nom du fichier déposé dans le dossier media, ex. media/rentree1.jpg)</span>
+<textarea id="p" rows="3" placeholder="media/rentree1.jpg"></textarea></label>
+<label>Vidéo <span class="hint">(lien YouTube, lien Facebook, ou fichier MP4 déposé dans media, ex. media/film.mp4)</span>
+<input id="v" placeholder="https://www.youtube.com/watch?v=..."></label>
+<button id="go">Ajouter et télécharger news.json</button>
+<div id="msg"></div>
+<script>
+const $=id=>document.getElementById(id);
+$('d').value=new Date().toISOString().slice(0,10);
+function say(t,ok){const m=$('msg');m.textContent=t;m.className=ok?'ok':'err';m.style.display='block'}
+function readFile(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsText(file)})}
+function parseVideo(u){
+  u=u.trim(); if(!u) return null;
+  let m=u.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+  if(m) return {type:'youtube',id:m[1]};
+  if(/^https:\/\/(www\.facebook\.com|fb\.watch)\//.test(u)) return {type:'facebook',url:u};
+  if(/^media\/[\w\-./]+\.mp4$/i.test(u)) return {type:'mp4',src:u};
+  throw new Error('Lien vidéo non reconnu (YouTube, Facebook ou media/fichier.mp4).');
+}
+$('go').onclick=async()=>{
+  try{
+    let data={updated:null,items:[]};
+    if($('f').files[0]){data=JSON.parse(await readFile($('f').files[0])); if(!Array.isArray(data.items)) data.items=[];}
+    const title=$('t').value.trim(), text=$('x').value.trim();
+    const photos=$('p').value.split('\n').map(s=>s.trim()).filter(Boolean);
+    photos.forEach(p=>{if(!/^media\/[\w\-./]+$/.test(p)||p.includes('..')) throw new Error('Nom de photo invalide : '+p+' (utilisez lettres, chiffres, - et _ sans espace).');});
+    const media=photos.map(src=>({type:'image',src}));
+    const v=parseVideo($('v').value); if(v) media.unshift(v);
+    if(!title&&!text&&!media.length) throw new Error('Écrivez au moins un titre, un texte, une photo ou une vidéo.');
+    data.items.unshift({id:'m_'+Date.now(),source:'manuel',date:$('d').value,title,text,url:'',media});
+    data.updated=new Date().toISOString();
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'}));
+    a.download='news.json'; document.body.appendChild(a); a.click(); a.remove();
+    say('Fichier news.json téléchargé ('+data.items.length+' actualité(s)). Déposez-le maintenant sur GitHub.',true);
+  }catch(e){say(e.message||String(e),false)}
+};
+</script></body></html>

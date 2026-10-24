@@ -2,33 +2,63 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Université UCK-G - Accueil</title>
+    <title>Université Communautaire du Kivu (UCK-G) – Goma, RDC</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Google Fonts pour style pro -->
+    <meta name="description" content="Site officiel de l'Université Communautaire du Kivu (UCK-G) à Goma : organisation académique, actualités, inscriptions en ligne et contact.">
+    <link rel="canonical" href="https://ubc-di.github.io/UCK/">
+    <link rel="icon" href="logo.jpg">
+
+    <!-- Aperçu lors du partage (WhatsApp, Facebook...) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="UCK-G">
+    <meta property="og:title" content="Université Communautaire du Kivu (UCK-G)">
+    <meta property="og:description" content="Union, Efficacité et Sagesse : formations, actualités et inscriptions en ligne.">
+    <meta property="og:url" content="https://ubc-di.github.io/UCK/">
+    <meta property="og:image" content="https://ubc-di.github.io/UCK/campus.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollegeOrUniversity",
+      "name": "Université Communautaire du Kivu",
+      "alternateName": "UCK-G",
+      "url": "https://ubc-di.github.io/UCK/",
+      "logo": "https://ubc-di.github.io/UCK/logo.jpg",
+      "image": "https://ubc-di.github.io/UCK/campus.jpg",
+      "description": "Institution universitaire en République démocratique du Congo, triptyque Union, Efficacité et Sagesse.",
+      "address": { "@type": "PostalAddress", "addressLocality": "Goma", "addressCountry": "CD" }
+    }
+    </script>
+
+    <!-- Google Fonts (si indisponible, le navigateur utilise une police standard) -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         /* Reset de base */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', sans-serif; }
+        section { scroll-margin-top: 60px; }
 
         /* Menu fixe */
         nav {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.75);
             padding: 15px 0;
             z-index: 1000;
         }
-        nav ul { list-style: none; display: flex; justify-content: center; }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; max-width: none; margin: 0; padding: 0; }
         nav ul li { margin: 0 20px; }
-        nav ul li a { color: white; text-decoration: none; font-weight: bold; font-size: 1.1em; }
+        nav ul li a { color: white; text-decoration: none; font-weight: bold; font-size: 1.05em; }
         nav ul li a:hover { text-decoration: underline; }
+        .nav-toggle { display: none; }
 
         /* Hero section */
         #home {
-            height: 100vh;
+            min-height: 100vh;
             background: url('campus.jpg') no-repeat center center/cover;
             position: relative;
             display: flex;
@@ -37,17 +67,8 @@
             text-align: center;
             color: white;
         }
-        #home::before {
-            content: "";
-            position: absolute;
-            top:0; left:0; right:0; bottom:0;
-            background: rgba(0,0,0,0.5);
-        }
-        #home .content {
-            position: relative;
-            max-width: 900px;
-            z-index: 1;
-        }
+        #home::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+        #home .content { position: relative; max-width: 900px; z-index: 1; }
         #home h1 { font-size: 3em; margin-bottom: 20px; }
         #home p { font-size: 1.5em; min-height: 50px; margin-bottom: 30px; }
 
@@ -67,33 +88,96 @@
         }
         .btn:hover { background-color: #003d80; }
 
-        /* Sections avec couleurs attractives */
-        section {
-            padding: 80px 20px;
-            text-align: center;
-        }
-
+        /* Sections */
+        section { padding: 80px 20px; text-align: center; }
         #about { background-color: #f0f8ff; color: #003366; }
         #programs { background-color: #e6f7ff; color: #003366; }
         #news { background-color: #fff0f5; color: #660033; }
         #admission { background-color: #f5fffa; color: #004d00; }
         #contact { background-color: #f8f8f8; color: #003366; }
 
-        /* Titres des sections */
-        h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
+        h2 { font-size: 2.5em; margin-bottom: 20px; }
         p, li { font-size: 1.2em; line-height: 1.6em; }
-
         ul { list-style: disc; text-align: left; max-width: 700px; margin: 20px auto; }
+
+        /* Organisation académique */
+        .accordion { max-width: 900px; margin: auto; }
+        .accordion-item { margin-bottom: 15px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: left; }
+        .accordion-header { padding: 18px; font-size: 18px; font-weight: bold; color: white; cursor: pointer; display: flex; justify-content: space-between; gap: 12px; }
+        .accordion-header:focus-visible { outline: 3px solid #ffbf47; outline-offset: -3px; }
+        .f1 { background:#003366; }
+        .f2 { background:#006633; }
+        .f3 { background:#800000; }
+        .f4 { background:#4b0082; }
+        .f5 { background:#006666; }
+        .f6 { background:#b8860b; }
+        .f7 { background:#556b2f; }
+        .f8 { background:#8b3a62; }
+        .accordion-content { max-height: 0; overflow: hidden; background: #f9f9f9; transition: max-height 0.4s ease; }
+        .accordion-content ul { padding: 15px; list-style: none; margin: 0 auto; max-width: none; }
+        .accordion-content li { margin-bottom: 8px; display: block; }
+        .fr, .en { display: block; }
+        .lang-btn { padding: 8px 14px; margin: 0 4px; border-radius: 5px; border: 1px solid #003366; background: white; cursor: pointer; font-size: 1em; }
+
+        /* Actualités */
+        .news-intro { max-width: 760px; margin: 0 auto 30px; }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 22px; max-width: 1100px; margin: 0 auto; text-align: left; }
+        .news-card { background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); overflow: hidden; display: flex; flex-direction: column; color: #333; }
+        .news-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .news-date { font-size: .85em; color: #8a6477; font-weight: bold; }
+        .news-title { font-size: 1.15em; line-height: 1.3em; color: #660033; margin: 0; }
+        .news-text { font-size: 1em; line-height: 1.5em; white-space: pre-line; overflow-wrap: anywhere; }
+        .news-more { align-self: flex-start; background: none; border: none; color: #0056b3; cursor: pointer; font-size: .95em; padding: 0; text-decoration: underline; }
+        .news-link { margin-top: auto; font-size: .95em; color: #0056b3; }
+        .news-media video, .news-media iframe { width: 100%; aspect-ratio: 16/9; border: 0; display: block; background: #000; }
+        .news-photos { display: grid; gap: 2px; background: #000; }
+        .news-photos.n1 { grid-template-columns: 1fr; }
+        .news-photos.n2 { grid-template-columns: 1fr 1fr; }
+        .news-photos.n3, .news-photos.n4 { grid-template-columns: 1fr 1fr; }
+        .news-photos.n3 button:first-child { grid-column: 1 / -1; }
+        .news-photos button { position: relative; padding: 0; border: 0; background: #222; cursor: zoom-in; aspect-ratio: 4/3; overflow: hidden; }
+        .news-photos.n1 button, .news-photos.n3 button:first-child { aspect-ratio: 16/10; }
+        .news-photos img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .news-photos .plus { position: absolute; inset: 0; background: rgba(0,0,0,.55); color: #fff; font-size: 1.8em; display: flex; align-items: center; justify-content: center; }
+        .news-empty, .news-status { max-width: 700px; margin: 0 auto 20px; font-size: 1em; }
+        .news-actions { margin-top: 26px; }
+        .fb-box { max-width: 520px; margin: 40px auto 0; }
+        .fb-box iframe { width: 100%; max-width: 500px; height: 600px; border: 0; background: #fff; border-radius: 8px; }
+
+        /* Visionneuse de photos */
+        #lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 2000; display: none; align-items: center; justify-content: center; }
+        #lightbox.open { display: flex; }
+        #lightbox img { max-width: 94vw; max-height: 86vh; object-fit: contain; }
+        #lightbox button { position: absolute; background: rgba(255,255,255,.15); color: #fff; border: 0; font-size: 2em; width: 52px; height: 52px; border-radius: 50%; cursor: pointer; }
+        #lightbox button:hover { background: rgba(255,255,255,.3); }
+        #lb-close { top: 14px; right: 14px; }
+        #lb-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+        #lb-next { right: 12px; top: 50%; transform: translateY(-50%); }
+        #lb-count { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #ddd; font-size: 1em; }
+
+        footer { background: #0f2540; color: #cfd8e6; text-align: center; padding: 26px 20px; font-size: .95em; }
+        footer a { color: #9cc4ff; }
+
+        @media (max-width: 900px) {
+            nav { padding: 8px 0; }
+            .nav-toggle { display: block; margin: 0 15px 0 auto; background: none; border: 1px solid #fff; color: #fff; font-size: 1.3em; padding: 4px 12px; border-radius: 5px; cursor: pointer; }
+            nav ul { display: none; flex-direction: column; align-items: center; padding: 8px 0 12px; }
+            nav.open ul { display: flex; }
+            nav ul li { margin: 9px 0; }
+            #home h1 { font-size: 2em; }
+            #home p { font-size: 1.2em; }
+            h2 { font-size: 1.9em; }
+            section { padding: 60px 16px; }
+            p, li { font-size: 1.05em; }
+        }
     </style>
 </head>
 <body>
 
     <!-- Menu -->
-    <nav>
-        <ul>
+    <nav id="mainnav">
+        <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navList">☰</button>
+        <ul id="navList">
             <li><a href="#home">Accueil</a></li>
             <li><a href="#about">À propos</a></li>
             <li><a href="#programs">Organisation académique</a></li>
@@ -103,7 +187,7 @@
         </ul>
     </nav>
 
-       <!-- Hero Section -->
+    <!-- Hero Section -->
     <section id="home">
         <div class="content">
             <h1>Université Communautaire du Kivu</h1>
@@ -113,174 +197,51 @@
         </div>
     </section>
 
+    <!-- À propos -->
+    <section id="about">
+        <h2>À propos de l'UCK-G</h2>
+        <p> Le développement technologique et industriel qui se vit actuellement à travers le monde, procure beaucoup de biens et reste envié par tout le monde, mais les méfaits qu’il porte sur notre environnement sont très prononcés.</p>
+        <p> Depuis très longtemps, l’homme est considéré comme premier destructeur de la nature.</p>
+        <p>Il est créé en République Démocratique du Congo une institution universitaire dénommée « Université Communautaire du Kivu» (UCK-G) par son Promoteur le Professeur Dr. Emmanuel Iragi Minani.</p>
+        <p>L'UCK-G se donne pour mission de réconcilier le savoir académique avec les réalités du terrain. Elle n'est pas seulement un lieu de transmission des connaissances, mais une forge où se préparent les futures cadres et bâtisseurs de la nation.</p>
+        <p>Développer les compétences professionnelles : Préparer les étudiants à intégrer efficacement le marché du travail grâce à des formations pratiques, des stages et des partenariats professionnels. </p>
+        <p> Encourager l’innovation et l’entrepreneuriat. Contribuer au développement communautaire</p>
+        <p> Participer au progrès des communautés locales à travers des programmes sociaux, sanitaires, éducatifs et environnementaux. Intégrer les technologies numériques</p>
+        <p> Moderniser l’enseignement et la gestion universitaire par l’utilisation des outils numériques et des plateformes d’apprentissage en ligne.</p>
+        <p>L’Arrêté ministériel d’Agrément N°18MINESU/CAB.MIN/018/du13 Sept 2007 portant autorisation de son fonctionnement a été signé en date du 13 Septembre 2007 à Kinshasa, et L’Arrêté d’Agrément définitif a été signé en 2011, portant autorisation d’homologation des Diplômes du premier et du deuxième Cycles.</p>
+        <p> L’Université Communautaire du Kivu vise à former des citoyens compétents, innovants et responsables, capables de contribuer au développement durable, scientifique, économique et social de la République démocratique du Congo en général et de la région du Kivu en particulier.</p>
+        <p>Plus spécifiquement : Assurer une formation académique de qualité: Offrir un enseignement supérieur conforme aux standards nationaux et internationaux dans différentes filières professionnelles et scientifiques.</p>
+        <p>À travers son triptyque <strong>« Union, Efficacité et Sagesse »</strong>, l'institution s'engage à :</p>
+        <ul>
+            <li>Promouvoir l’excellence dans les domaines de l'ingénierie, du droit humanitaire, de la psychologie et du management de développement ;</li>
+            <li>Inculquer les valeurs de redevabilité, de patriotisme et de solidarité humaine ;</li>
+            <li>Apporter des solutions innovantes aux problématiques de décentralisation et d'administration publique pour un impact réel dans nos provinces.</li>
+        </ul>
+        <p>Le rectorat de l'UCK vous souhaite la bienvenue pour découvrir l'ambiance réelle de l'apprentissage.</p>
 
-   <!-- À propos -->
-<section id="about">
-    <h2>À propos de l'UCK-G</h2>
-    <p> Le développement technologique et industriel qui se vit actuellement à travers le monde, procure beaucoup de biens et reste envié par tout le monde, mais les méfaits qu’il porte sur notre environnement sont très prononcés.</p>
-    <p> Depuis très longtemps, l’homme est considéré comme premier destructeur de la nature.</p>
-    <p>Il est créé en République Démocratique du Congo une institution universitaire dénommée « Université Communautaire du Kivu» (UCK-G) par son Promoteur le Professeur Dr. Emmanuel Iragi Minani.</p>
-    <p>L'UCK-G se donne pour mission de réconcilier le savoir académique avec les réalités du terrain. Elle n'est pas seulement un lieu de transmission des connaissances, mais une forge où se préparent les futures cadres et bâtisseurs de la nation.</p>
-    <p>Développer les compétences professionnelles : Préparer les étudiants à intégrer efficacement le marché du travail grâce à des formations pratiques, des stages et des partenariats professionnels. </p>
-    <p> Encourager l’innovation et l’entrepreneuriat. Contribuer au développement communautaire</p>
-    <p> Participer au progrès des communautés locales à travers des programmes sociaux, sanitaires, éducatifs et environnementaux. Intégrer les technologies numériques</p>
-    <p> Moderniser l’enseignement et la gestion universitaire par l’utilisation des outils numériques et des plateformes d’apprentissage en ligne.</p>
-    <p>L’Arrêté ministériel d’Agrément N°18MINESU/CAB.MIN/018/du13 Sept 2007 portant autorisation de son fonctionnement a été signé en date du 13 Septembre 2007 à Kinshasa, et L’Arrêté d’Agrément définitif a été signé en 2011, portant autorisation d’homologation des Diplômes du premier et du deuxième Cycles.</p>
-    <p> L’Université Communautaire du Kivu vise à former des citoyens compétents, innovants et responsables, capables de contribuer au développement durable, scientifique, économique et social de la République démocratique du Congo en général et de la région du Kivu en particulier.</p>
-    <p>Plus spécifiquement : Assurer une formation académique de qualité: Offrir un enseignement supérieur conforme aux standards nationaux et internationaux dans différentes filières professionnelles et scientifiques.</p>
-     <p>À travers son triptyque <strong>« Union, Efficacité et Sagesse »</strong>, l'institution s'engage à :</p>
-    <ul>
-        <li>Promouvoir l’excellence dans les domaines de l'ingénierie, du droit humanitaire, de la psychologie et du management de développement ;</li>
-        <li>Inculquer les valeurs de redevabilité, de patriotisme et de solidarité humaine ;</li>
-        <li>Apporter des solutions innovantes aux problématiques de décentralisation et d'administration publique pour un impact réel dans nos provinces.</li>
-    </ul>
- <p>Le rectorat de l'UCK vous souhaite les bienvenus pour decouvrir l'ambiance de l'apprentissage réelle.</p>
-    <!-- ✅ AJOUT PROFESSIONNEL -->
-    <div style="margin-top:50px;">
-        <h3> Dans ses pespectives, l'UCK-G dans un futur proche prévoit organiser également :</h3>
+        <div style="margin-top:50px;">
+            <h3> Dans ses perspectives, l'UCK-G dans un futur proche prévoit organiser également :</h3>
 
-        <div style="text-align:center;">
-            <button class="btn" onclick="showInfo('primaire')"> Une école École Primaire</button>
-            <button class="btn" onclick="showInfo('secondaire')">Une Institution Secondaire Technique </button>
-            <button class="btn" onclick="showInfo('cfp')"> Un  Centre de Formation Professionnelle </button>
+            <div style="text-align:center;">
+                <button class="btn" onclick="showInfo('primaire')">Une École Primaire</button>
+                <button class="btn" onclick="showInfo('secondaire')">Une Institution Secondaire Technique</button>
+                <button class="btn" onclick="showInfo('cfp')">Un Centre de Formation Professionnelle</button>
+            </div>
+
+            <div id="infoBox" style="margin-top:30px; max-width:800px; margin:auto; text-align:left; background:white; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"></div>
         </div>
-
-        <div id="infoBox" style="margin-top:30px; max-width:800px; margin:auto; text-align:left; background:white; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"></div>
-    </div>
-
-    <!-- ✅ SCRIPT -->
-    <script>
-    function showInfo(type){
-        let content = "";
-
-        if(type === "primaire"){
-            content = `
-            <h3>École Primaire</h3>
-            <p>L'École Primaire  constituera la base du parcours éducatif en offrant une formation complète axée sur l’excellence académique, la discipline et les valeurs humaines.</p>
-            <ul>
-                <li>Encadrement pédagogique de qualité</li>
-                <li>Formation morale et civique</li>
-                <li>Développement de la créativité et des talents</li>
-                <li>Préparation solide des enfants pour l’enseignement secondaire</li>
-            </ul>`;
-        }
-
-        if(type === "secondaire"){
-            content = `
-            <h3>Institut Technique </h3>
-            <p>L’Institut formera des jeunes compétents et autonomes grâce à une approche pratique adaptée aux réalités professionnelles.</p>
-
-            <h4>Cycles en attente :</h4>
-            <ul>
-                <li>Cycle d’orientation</li>
-                <li>Cycle secondaire long :
-                    <ul>
-                        <li>Agro-vet</li>
-                        <li>Technique sociale</li>
-                        <li>Nutrition</li>
-                        <li>Électricité générale</li>
-                        <li>Mécanique générale</li>
-                        <li>Mécanique automobile</li>
-                    </ul>
-                </li>
-                <li>Cycle court :
-                    <ul>
-                        <li>Mécanique automobile (3 ans)</li>
-                    </ul>
-                </li>
-            </ul>`;
-        }
-
-        if(type === "cfp"){
-            content = `
-            <h3>Centre de Formation Professionnelle</h3>
-            <p>Ce centre sera sous gestion du Ministère de la Formation Professionnelle, Arts et Métiers, ce centre offre des formations pratiques pour une insertion rapide dans le monde professionnel.</p>
-
-            <ul>
-                <li>Mecanique générale</li>
-                <li>Coupe et couture</li>
-                <li>Informatique</li>
-                <li>Mécanique automobile</li>
-                <li>Étude des langues</li>
-                <li>Ajustage et soudure</li>
-            </ul>
-
-            <h4>Adresse :</h4>
-            <p>
-            Siège social : Au nord Kivu dans le  quartier le Volcan, Avenue des écoles, dans l'enclos de l'institut Neema(Ephata)<br>
-            Commune de Goma, Ville de Goma<br>
-            Au Sud kivu, l'UCK fonctionne dans le batiment de l'institut Nyamokola à Birava<br>
-            Province du Nord-Kivu et du Sud Kivu, République Démocratique du Congo
-            </p>`;
-        }
-
-        document.getElementById("infoBox").innerHTML = content;
-    }
-    </script>
-
-</section>
+    </section>
 
     <!-- Organisation académique -->
- <section id="programs">
-    <h2 id="title">Organisation académique</h2>
+    <section id="programs">
+        <h2 id="title">Organisation académique</h2>
 
-    <!-- Boutons langue -->
-    <div style="text-align:center; margin-bottom:20px;">
-        <button onclick="setLang('fr')">🇫🇷 Français</button>
-        <button onclick="setLang('en')">🇬🇧 English</button>
-    </div>
+        <div style="text-align:center; margin-bottom:20px;">
+            <button class="lang-btn" onclick="setLang('fr')">🇫🇷 Français</button>
+            <button class="lang-btn" onclick="setLang('en')">🇬🇧 English</button>
+        </div>
 
-    <style>
-        .accordion { max-width: 900px; margin: auto; }
-
-        .accordion-item {
-            margin-bottom: 15px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .accordion-header {
-            padding: 18px;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .f1 { background:#003366; }
-        .f2 { background:#006633; }
-        .f3 { background:#800000; }
-        .f4 { background:#4b0082; }
-        .f5 { background:#006666; }
-        .f6 { background:#b8860b; }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            background: #f9f9f9;
-            transition: max-height 0.4s ease;
-        }
-
-        ul { padding: 15px; }
-
-        /* ✅ ALIGNEMENT VERTICAL CORRIGÉ */
-        li {
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .fr, .en {
-            display: block;
-        }
-    </style>
-
-    <div class="accordion">
-
-      <div class="accordion">
-
+        <div class="accordion">
     <!-- 1 -->
     <div class="accordion-item">
         <div class="accordion-header f1">
@@ -473,61 +434,28 @@
         </div>
     </div>
 
-</div>
-<script>
-        const items = document.querySelectorAll(".accordion-item");
 
-        items.forEach(item => {
-            const header = item.querySelector(".accordion-header");
-            const content = item.querySelector(".accordion-content");
+        </div>
+    </section>
 
-            header.addEventListener("click", () => {
-
-                items.forEach(i => {
-                    if (i !== item) {
-                        i.querySelector(".accordion-content").style.maxHeight = null;
-                        i.querySelector(".accordion-header span:last-child").textContent = "+";
-                    }
-                });
-
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                    header.querySelector("span:last-child").textContent = "+";
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    header.querySelector("span:last-child").textContent = "−";
-                }
-            });
-        });
-
-        function setLang(lang){
-            document.querySelectorAll('.fr').forEach(el => el.style.display = (lang==='fr')?'block':'none');
-            document.querySelectorAll('.en').forEach(el => el.style.display = (lang==='en')?'block':'none');
-
-            document.getElementById("title").textContent =
-                (lang==='fr') ? "Organisation académique" : "Academic Programs";
-        }
-
-        setLang('fr');
-    </script>
-
-</section>
     <!-- Actualités -->
     <section id="news">
         <h2>Actualités</h2>
-        <p>Restez informé des événements, conférences et initiatives de l'UCK-G :</p>
-        <ul>
-            <li>Ouverture officielle du campus et cérémonie d’inauguration</li>
-            <li>Conférences internationales sur le développement et l’innovation</li>
-            <li>Programmes de recherche en ingénierie et sciences sociales</li>
-        </ul>
+        <p class="news-intro">Restez informé des événements, conférences et initiatives de l'UCK-G.</p>
+        <div id="newsStatus" class="news-status" role="status"></div>
+        <div id="newsGrid" class="news-grid"></div>
+        <div class="news-actions">
+            <button id="newsMore" class="btn" style="display:none">Voir plus d'actualités</button>
+            <a id="fbLink" class="btn" style="display:none" target="_blank" rel="noopener noreferrer">Notre page Facebook</a>
+        </div>
+        <div id="fbBox" class="fb-box"></div>
     </section>
 
     <!-- Inscriptions -->
     <section id="admission">
         <h2>Inscriptions en ligne</h2>
         <p>Inscrivez-vous dès maintenant à l'UCK-G pour rejoindre nos programmes. Toutes les informations seront envoyées directement dans notre base des données.</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSebM1P8RwSBHQ5D7h0JITptWM01-e5vDdOAIix-E_9kv9UUgw/viewform?usp=header" class="btn" target="_blank">Remplir le formulaire d'inscription</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSebM1P8RwSBHQ5D7h0JITptWM01-e5vDdOAIix-E_9kv9UUgw/viewform?usp=header" class="btn" target="_blank" rel="noopener noreferrer">Remplir le formulaire d'inscription</a>
         <p>Les étudiants inscrits recevront un numéro de matricule automatique et toutes les données seront accessibles pour le suivi et gestion dans notre formulaire google.</p>
     </section>
 
@@ -536,8 +464,7 @@
         <h2>Contactez-nous</h2>
         <p>Envoyez-nous un message directement depuis le site !</p>
 
-        <form action="https://formspree.io/f/xaeyqjdw" method="POST" style="max-width:500px; margin:auto; display:flex; flex-direction:column;">
-
+        <form action="https://formspree.io/f/xaeyqjdw" method="POST" style="max-width:500px; margin:auto; display:flex; flex-direction:column; text-align:left;">
             <label for="name">Votre nom</label>
             <input type="text" id="name" name="name" placeholder="Votre nom" required style="padding:10px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc;">
 
@@ -547,49 +474,314 @@
             <label for="message">Votre message</label>
             <textarea id="message" name="message" rows="6" placeholder="Écrivez votre message ici..." required style="padding:10px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc;"></textarea>
 
-            <button type="submit" style="padding:12px; background-color:#003366; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px;">
-            Envoyer
-            </button>
+            <button type="submit" style="padding:12px; background-color:#003366; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px;">Envoyer</button>
         </form>
     </section>
 
+    <footer>
+        © Université Communautaire du Kivu (UCK-G) · Union, Efficacité et Sagesse
+    </footer>
+
+    <!-- Visionneuse photos -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Photos">
+        <button id="lb-close" aria-label="Fermer">×</button>
+        <button id="lb-prev" aria-label="Photo précédente">‹</button>
+        <img id="lb-img" alt="">
+        <button id="lb-next" aria-label="Photo suivante">›</button>
+        <div id="lb-count"></div>
+    </div>
+
     <script>
+    /* ---------- Section « À propos » : contenu statique ---------- */
+    function showInfo(type){
+        let content = "";
+        if(type === "primaire"){
+            content = `
+            <h3>École Primaire</h3>
+            <p>L'École Primaire constituera la base du parcours éducatif en offrant une formation complète axée sur l’excellence académique, la discipline et les valeurs humaines.</p>
+            <ul>
+                <li>Encadrement pédagogique de qualité</li>
+                <li>Formation morale et civique</li>
+                <li>Développement de la créativité et des talents</li>
+                <li>Préparation solide des enfants pour l’enseignement secondaire</li>
+            </ul>`;
+        }
+        if(type === "secondaire"){
+            content = `
+            <h3>Institut Technique</h3>
+            <p>L’Institut formera des jeunes compétents et autonomes grâce à une approche pratique adaptée aux réalités professionnelles.</p>
+            <h4>Cycles en attente :</h4>
+            <ul>
+                <li>Cycle d’orientation</li>
+                <li>Cycle secondaire long :
+                    <ul>
+                        <li>Agro-vet</li>
+                        <li>Technique sociale</li>
+                        <li>Nutrition</li>
+                        <li>Électricité générale</li>
+                        <li>Mécanique générale</li>
+                        <li>Mécanique automobile</li>
+                    </ul>
+                </li>
+                <li>Cycle court :
+                    <ul>
+                        <li>Mécanique automobile (3 ans)</li>
+                    </ul>
+                </li>
+            </ul>`;
+        }
+        if(type === "cfp"){
+            content = `
+            <h3>Centre de Formation Professionnelle</h3>
+            <p>Ce centre sera sous gestion du Ministère de la Formation Professionnelle, Arts et Métiers, ce centre offre des formations pratiques pour une insertion rapide dans le monde professionnel.</p>
+            <ul>
+                <li>Mécanique générale</li>
+                <li>Coupe et couture</li>
+                <li>Informatique</li>
+                <li>Mécanique automobile</li>
+                <li>Étude des langues</li>
+                <li>Ajustage et soudure</li>
+            </ul>
+            <h4>Adresse :</h4>
+            <p>
+            Siège social : Au Nord-Kivu dans le quartier le Volcan, Avenue des écoles, dans l'enclos de l'institut Neema (Ephata)<br>
+            Commune de Goma, Ville de Goma<br>
+            Au Sud-Kivu, l'UCK fonctionne dans le bâtiment de l'institut Nyamokola à Birava<br>
+            Province du Nord-Kivu et du Sud-Kivu, République Démocratique du Congo
+            </p>`;
+        }
+        document.getElementById("infoBox").innerHTML = content; /* texte fixe écrit ici, jamais de données externes */
+    }
+
+    /* ---------- Menu mobile ---------- */
+    (function(){
+        const nav = document.getElementById('mainnav');
+        const btn = document.getElementById('navToggle');
+        function set(open){ nav.classList.toggle('open', open); btn.setAttribute('aria-expanded', open); btn.textContent = open ? '✕' : '☰'; }
+        btn.addEventListener('click', () => set(!nav.classList.contains('open')));
+        nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => set(false)));
+    })();
+
+    /* ---------- Organisation académique ---------- */
+    (function(){
+        const items = document.querySelectorAll(".accordion-item");
+        items.forEach(item => {
+            const header = item.querySelector(".accordion-header");
+            const content = item.querySelector(".accordion-content");
+            header.setAttribute('role', 'button');
+            header.setAttribute('tabindex', '0');
+            header.setAttribute('aria-expanded', 'false');
+            const sign = h => h.querySelector("span:last-child");
+            function toggle(){
+                items.forEach(i => {
+                    if (i !== item) {
+                        i.querySelector(".accordion-content").style.maxHeight = null;
+                        sign(i.querySelector(".accordion-header")).textContent = "+";
+                        i.querySelector(".accordion-header").setAttribute('aria-expanded', 'false');
+                    }
+                });
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    sign(header).textContent = "+";
+                    header.setAttribute('aria-expanded', 'false');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    sign(header).textContent = "−";
+                    header.setAttribute('aria-expanded', 'true');
+                }
+            }
+            header.addEventListener("click", toggle);
+            header.addEventListener("keydown", e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+        });
+    })();
+
+    function setLang(lang){
+        document.querySelectorAll('.fr').forEach(el => el.style.display = (lang==='fr')?'block':'none');
+        document.querySelectorAll('.en').forEach(el => el.style.display = (lang==='en')?'block':'none');
+        document.getElementById("title").textContent = (lang==='fr') ? "Organisation académique" : "Academic Programs";
+        document.querySelectorAll(".accordion-content").forEach(c => { if (c.style.maxHeight) c.style.maxHeight = c.scrollHeight + "px"; });
+    }
+    setLang('fr');
+
+    /* ---------- Actualités (lues dans news.json) ---------- */
+    (function(){
+        const PAGE = 6;
+        const grid = document.getElementById('newsGrid');
+        const status = document.getElementById('newsStatus');
+        const moreBtn = document.getElementById('newsMore');
+        let list = [], shown = 0;
+
+        /* Sécurité : on n'accepte que des chemins du site ou des adresses https */
+        function safeUrl(u){
+            if (typeof u !== 'string') return null;
+            if (/^https:\/\//i.test(u)) return u;
+            if (/^[\w\-./]+$/.test(u) && !u.includes('..') && !u.startsWith('/')) return u;
+            return null;
+        }
+        function el(tag, cls, text){
+            const e = document.createElement(tag);
+            if (cls) e.className = cls;
+            if (text != null) e.textContent = text;
+            return e;
+        }
+
+        /* Visionneuse */
+        const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img'), lbCount = document.getElementById('lb-count');
+        let lbList = [], lbIdx = 0, lastFocus = null;
+        function lbShow(){ lbImg.src = lbList[lbIdx]; lbCount.textContent = (lbIdx + 1) + ' / ' + lbList.length; }
+        function lbOpen(urls, i){ lbList = urls; lbIdx = i; lastFocus = document.activeElement; lbShow(); lb.classList.add('open'); document.getElementById('lb-close').focus(); }
+        function lbClose(){ lb.classList.remove('open'); lbImg.removeAttribute('src'); if (lastFocus) lastFocus.focus(); }
+        function lbMove(d){ lbIdx = (lbIdx + d + lbList.length) % lbList.length; lbShow(); }
+        document.getElementById('lb-close').onclick = lbClose;
+        document.getElementById('lb-prev').onclick = () => lbMove(-1);
+        document.getElementById('lb-next').onclick = () => lbMove(1);
+        lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+        document.addEventListener('keydown', e => {
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') lbClose();
+            if (e.key === 'ArrowLeft') lbMove(-1);
+            if (e.key === 'ArrowRight') lbMove(1);
+        });
+
+        function videoNode(v){
+            const box = el('div', 'news-media');
+            if (v.type === 'mp4' || v.type === 'video') {
+                const src = safeUrl(v.src);
+                if (!src) return null;
+                const vid = document.createElement('video');
+                vid.controls = true; vid.preload = 'metadata'; vid.playsInline = true;
+                const poster = safeUrl(v.poster); if (poster) vid.poster = poster;
+                vid.src = src;
+                box.appendChild(vid); return box;
+            }
+            let frameSrc = null;
+            if (v.type === 'youtube' && typeof v.id === 'string' && /^[\w-]{11}$/.test(v.id)) {
+                frameSrc = 'https://www.youtube-nocookie.com/embed/' + v.id;
+            } else if (v.type === 'facebook' && typeof v.url === 'string' && /^https:\/\/(www\.facebook\.com|fb\.watch)\//.test(v.url)) {
+                frameSrc = 'https://www.facebook.com/plugins/video.php?show_text=false&href=' + encodeURIComponent(v.url);
+            }
+            if (!frameSrc) return null;
+            const f = document.createElement('iframe');
+            f.src = frameSrc; f.loading = 'lazy'; f.title = 'Vidéo';
+            f.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+            f.allowFullscreen = true;
+            box.appendChild(f); return box;
+        }
+
+        function card(it){
+            const c = el('article', 'news-card');
+            const media = Array.isArray(it.media) ? it.media : [];
+            media.filter(m => m && ['mp4','video','youtube','facebook'].includes(m.type)).slice(0, 2).forEach(v => {
+                const n = videoNode(v); if (n) c.appendChild(n);
+            });
+            const imgs = media.filter(m => m && m.type === 'image').map(m => safeUrl(m.src)).filter(Boolean);
+            if (imgs.length) {
+                const shownImgs = imgs.slice(0, 4);
+                const g = el('div', 'news-photos n' + shownImgs.length);
+                shownImgs.forEach((u, k) => {
+                    const b = document.createElement('button');
+                    b.type = 'button'; b.setAttribute('aria-label', 'Agrandir la photo ' + (k + 1));
+                    const im = document.createElement('img');
+                    im.src = u; im.alt = it.title ? String(it.title) : 'Photo'; im.loading = 'lazy';
+                    b.appendChild(im);
+                    if (k === 3 && imgs.length > 4) b.appendChild(el('span', 'plus', '+' + (imgs.length - 4)));
+                    b.addEventListener('click', () => lbOpen(imgs, k));
+                    g.appendChild(b);
+                });
+                c.appendChild(g);
+            }
+            const body = el('div', 'news-body');
+            const d = it.date ? new Date(it.date) : null;
+            if (d && !isNaN(d)) body.appendChild(el('div', 'news-date', d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })));
+            if (it.title) body.appendChild(el('h3', 'news-title', String(it.title)));
+            if (it.text) {
+                const full = String(it.text);
+                const t = el('p', 'news-text', full.length > 280 ? full.slice(0, 280).trimEnd() + '…' : full);
+                body.appendChild(t);
+                if (full.length > 280) {
+                    const m = el('button', 'news-more', 'Lire la suite');
+                    m.type = 'button';
+                    let open = false;
+                    m.addEventListener('click', () => { open = !open; t.textContent = open ? full : full.slice(0, 280).trimEnd() + '…'; m.textContent = open ? 'Réduire' : 'Lire la suite'; });
+                    body.appendChild(m);
+                }
+            }
+            if (typeof it.url === 'string' && /^https:\/\//i.test(it.url)) {
+                const a = el('a', 'news-link', 'Voir la publication d’origine');
+                a.href = it.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+                body.appendChild(a);
+            }
+            c.appendChild(body);
+            return c;
+        }
+
+        function more(){
+            list.slice(shown, shown + PAGE).forEach(it => grid.appendChild(card(it)));
+            shown = Math.min(list.length, shown + PAGE);
+            moreBtn.style.display = shown < list.length ? 'inline-block' : 'none';
+        }
+        moreBtn.addEventListener('click', more);
+
+        function fallback(){
+            grid.style.display = 'block';
+            const u = el('ul');
+            ["Ouverture officielle du campus et cérémonie d’inauguration",
+             "Conférences internationales sur le développement et l’innovation",
+             "Programmes de recherche en ingénierie et sciences sociales"].forEach(t => u.appendChild(el('li', null, t)));
+            status.textContent = 'Les dernières publications apparaîtront ici dès qu’elles seront disponibles. En attendant :';
+            grid.appendChild(u);
+        }
+
+        fetch('news.json', { cache: 'no-cache' })
+            .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            .then(d => {
+                list = (Array.isArray(d.items) ? d.items : []).filter(x => x && (x.title || x.text || (x.media && x.media.length)));
+                list.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+                if (!list.length) return fallback();
+                more();
+            })
+            .catch(fallback);
+
+        /* Page Facebook : lien + encart (config.json) */
+        fetch('config.json', { cache: 'no-cache' })
+            .then(r => r.ok ? r.json() : {})
+            .then(cfg => {
+                const u = cfg && cfg.facebook_page_url;
+                if (typeof u !== 'string' || !/^https:\/\/(www\.)?facebook\.com\/[\w.\-\/?=&%]+$/.test(u)) return;
+                const a = document.getElementById('fbLink');
+                a.href = u; a.style.display = 'inline-block';
+                if (cfg.show_page_plugin !== false) {
+                    const f = document.createElement('iframe');
+                    f.src = 'https://www.facebook.com/plugins/page.php?tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&href=' + encodeURIComponent(u);
+                    f.loading = 'lazy'; f.title = 'Page Facebook de l’UCK-G';
+                    f.allow = 'encrypted-media';
+                    document.getElementById('fbBox').appendChild(f);
+                }
+            })
+            .catch(() => {});
+    })();
+
+    /* ---------- Animation d'accueil ---------- */
+    (function(){
         const messages = [
             "Bienvenue à l’Université Communautaire du Kivu (UCK-G)",
             "Union - Sagesse - Efficacité",
-            "Former les cadres et bâtisseurs de demain",
-        
+            "Former les cadres et bâtisseurs de demain"
         ];
-
-        let i = 0;
-        let j = 0;
-        let currentText = "";
-        let isDeleting = false;
-
-        const speed = 180;
-        const eraseSpeed = 100;
-        const pauseTime = 2000;
-
+        let i = 0, j = 0, isDeleting = false;
+        const out = document.getElementById("animated-text");
         function type() {
-            const fullText = messages[i];
-            if (!isDeleting) {
-                currentText = fullText.substring(0, j + 1);
-                j++;
-            } else {
-                currentText = fullText.substring(0, j - 1);
-                j--;
-            }
-            document.getElementById("animated-text").textContent = currentText;
-            let timeout = speed;
-            if (!isDeleting && j === fullText.length) { timeout = pauseTime; isDeleting = true; }
-            else if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % messages.length; timeout = 500; }
-            else if (isDeleting) { timeout = eraseSpeed; }
-            setTimeout(type, timeout);
+            const full = messages[i];
+            j += isDeleting ? -1 : 1;
+            out.textContent = full.substring(0, j);
+            let t = isDeleting ? 60 : 90;
+            if (!isDeleting && j === full.length) { t = 2000; isDeleting = true; }
+            else if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % messages.length; t = 500; }
+            setTimeout(type, t);
         }
-
         type();
+    })();
     </script>
 
 </body>
 </html>
-
